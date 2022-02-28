@@ -1,0 +1,640 @@
+﻿
+
+#include <iostream>
+#include <conio.h>
+
+#define max 20
+
+using namespace std;
+
+class base
+{
+public:
+	
+	char name[20];
+  int emp_id;
+	int age;
+  char dep_name[20];
+	int dep_code;
+	
+};
+
+class department : public base
+{
+public:
+	void insert_dept();
+  void edit_dept();
+	void delete_dept();	
+	void show_dept();
+	
+};
+
+
+class emp : public base
+{
+public:
+	void insert_emp();
+  void edit_emp();
+  void delete_emp();
+	void show_emp();
+	void sort_emp();
+	void search_emp();
+	
+};
+
+
+
+int num;
+int i;
+department dep1[20], tempdep[max];
+emp ep[20], tempemp[max];
+
+
+
+int main()
+{
+  void insert_dept();
+  void edit_dept();
+	void delete_dept();
+	void show_dept();
+	void insert_emp();
+  void edit_emp();
+  void delete_emp();
+	void show_emp();
+	void sort_emp();
+	void search_emp();
+	
+	
+	
+	int choice;
+	system("cls");
+	cout << ("	\t\t\t\t\t------CONSOLE APP MENU-----\n");
+
+	cout << " \n ______________________________________________________________________________________________________________________";
+	cout << ("\n");
+  cout << ("\n01. INSERT DEPARTMENT \n");
+  cout << ("02. EDIT DEPARTMENT \n");
+	cout << ("03. DELETE DEPARTMENT \n");
+	cout << ("04. DISPLAY DEPARTMENT  \n");
+	cout << ("05. INSERT EMPLOYEE  \n");
+  cout << ("06. EDIT EMPLOYEE DETAILS\n");
+  cout << ("07. DELETE EMPLOYEE \n");
+	cout << ("08. DISPLAY EMPLOYEE\n");
+	cout << ("09. SORT EMPLOYEE DETAILS (BY NAME)\n");
+	cout << ("10. SEARCH EMPLOYEE ID \n");
+	
+	
+	
+	cout << ("\n  YOUR CHOICE : ");
+	cin >> choice;
+	do {
+		switch (choice)
+		{
+		
+		case 1:
+			insert_dept();
+			break;
+		case 2:
+			show_dept();
+			break;
+		case 3:
+			edit_dept();
+			break;
+		case 4:
+			delete_dept();
+			break;
+  case 5:
+		  insert_emp();
+			break;
+		case 6:
+			edit_emp();
+			break;
+		case 7:
+			delete_emp();
+			break;
+		case 8:
+			show_emp();
+			break;
+   case 9:
+			sort_emp();
+			break;
+		case 10:
+			search_emp();
+			break;
+	case 11:
+			exit(0);
+			break;
+		default:
+			cout << ("your choice is invalid ");
+
+		}
+	} while (choice != 0);
+
+}
+
+void insert_dept()
+{
+	system("cls");
+
+	int i = num;
+
+	num += 1;
+
+	int temp;
+
+	cout << "HOW MANY DEPARTMENTS YOU WANT TO ENTER? ----->";
+
+	cin >> num;
+
+	cout << ("\n\n\t\t ADD DEPARTMENT \n");
+
+	for (int i = 0; i < num; i++)
+	{
+		cout << ("ENTER DEPARTMENT NAME : ");
+		cin >> dep1[i].dep_name;
+		cout << ("ENTER DEPARTMENT CODE : ");
+		cin >> dep1[i].dep_code;
+	}
+
+	int res = strcmp(dep1[i].dep_name, dep1[i + 1].dep_name);
+
+	if (res == 0)
+	{
+		cout << ("DEPARTMENT ALREADY EXISTS ");
+		cout << "\nSELECT DELETE EMPLOYEE FROM MENU TO DELETE ID ";
+
+		_getch();
+		main();
+	}
+	cout << ("NEW DEPARTMENT INSERTED SUCCESFULLY ");
+
+	cout << ("\nPRESS ENTER TO RETURN TO MENU ");
+
+	_getch();
+	main();
+
+}
+void edit_dept()
+{
+	system("cls");
+	cout << "    \t\t\t \t\t EDIT DETAILS OF DEPARTMENT " << endl;
+	cout << "  \t\t\t ------------------------------------------------------" << endl;
+	if (num != 0) {
+
+		int dep_code;
+
+		cout << "ENTER CODE OF DEPARTMENT YOU WANT TO EDIT " << endl;
+
+		cin >> dep_code;
+
+		for (int i = 0; i < num; i++) {
+
+			if (dep1[i].dep_code == dep_code) {
+
+				cout << " OLD DETAILS OF DEPARTMENT " << i + 1 << endl;
+
+				cout << " OLD NAME : " << dep1[i].dep_name << endl;
+
+				cout << " OLD CODE : " << dep1[i].dep_code << endl;
+
+
+				cout << "\nENTER NEW DEPARTMENT DETAILS" << endl;
+
+				cout << "ENTER DEPARTMENT NAME: ";
+
+				cin >> dep1[i].dep_name;
+
+				cout << "ENTER NEW CODE: ";
+
+				cin >> dep1[i].dep_code;
+
+				break;
+
+			}
+
+			if (i == num - 1)
+			{
+				cout << "NO SUCH DEPARTMENT FOUND" << endl;
+			}
+
+		}
+
+	}
+	else
+	{
+		cout << "NO DATA IS ENTERED" << endl;
+	}
+
+	cout << ("PRESS ENTER TO RETURN TO MENU");
+
+	_getch();
+	main();
+
+}
+
+
+
+void delete_dept()
+{
+	system("cls");
+
+	int dep_code;
+
+	int check;
+
+	printf("\t\t\t ----DELETE AN EMPLOYEE ENTRY---- ");
+
+	cout << endl;
+
+	cout << "ENTER THE DEPARTMENT CODE TO BE DELETED :  ";
+
+	cin >> dep_code;
+
+	int i;
+
+	for (i = 0; i <= num - 1; i++)
+
+	{
+
+		if (dep1[i].dep_code == dep_code)
+
+		{
+			check = i;
+		}
+
+	}
+
+	for (i = 0; i <= num - 1; i++)
+
+	{
+
+		if (i == check)
+
+		{
+        	continue;
+		}
+
+		else
+
+		{
+			if (i > check)
+
+			{
+				tempdep[i - 1] = dep1[i];
+			}
+
+			else
+
+		    {
+				tempdep[i] = dep1[i];
+			}
+
+		}
+
+	}
+
+	num--;
+
+	for (i = 0; i <= num - 1; i++)
+
+	{
+    	dep1[i] = tempdep[i];
+	}
+	cout << "PRESS ENTER TO RETURN TO MENU ";
+
+	_getch();
+	main();
+
+}
+
+
+void show_dept()
+{
+	system("cls");
+	char temp;
+	int maxs;
+	cout << "    \t\t\t \t\tDETAILS OF EMPLOYEE " << endl;
+
+	cout << "  \t\t\t ------------------------------------------------------" << endl;
+	cout << "\t\t|  DEPARTMENT NAME  |";
+	cout << "\t\t|  DEPARTMENT CODE |";
+
+	cout << " \n _______________________________________________________________________________________________________________________";
+
+
+	for (int i = 0; i <= 4; i++)
+	{
+		cout << "\n\t\t" << dep1[i].dep_name << "\t\t|";
+
+		cout << "\t\t\t" << dep1[i].dep_code << "\t\t|";
+	}
+
+	for (i = 0; i <= 10; i++)
+	{
+		cout << "\nHOW MANY NEXT RECORDS YOU WANT TO DISPLAY ";
+		cin >> maxs;
+		cout << "\nPRESS 'n' TO VIEW NEXT 5 RECORDS : ";
+		cin >> temp;
+
+		if (temp == 'n')
+		{
+			system("cls");
+			for (i = 1; i <= maxs; i++)
+			{
+				cout << "\n\t\t" << dep1[i].dep_name << "\t\t|";
+
+				cout << "\t\t\t" << dep1[i].dep_code << "\t\t|";
+			}
+		}
+	}
+	cout << "\nPRESS ENTER TO RETURN TO MENU ";
+
+	_getch();
+
+	main();
+}
+
+void insert_emp()
+{
+    system("cls");
+
+	int i = num;
+
+	num += 1;
+
+	int temp;
+
+	cout << "HOW MANY EMPLOYEES DO YOU WANT TO ADD?  ----->";
+
+	cin >> num;
+
+	cout << ("\n\n\n\t\t INSERT EMPLOYEE \n");
+
+	for (int i = 0; i <= num - 1; i++)
+	{
+		cout << ("ENTER EMPLOYEE NAME : ");
+		cin >> ep[i].name;
+		cout << ("ENTER EMPLOYEE ID : ");
+		cin >> ep[i].emp_id;
+		cout << ("ENTER EMPLOYEE AGE : ");
+		cin >> ep[i].age;
+
+	}
+	int res = strcmp(ep[i].name, ep[i + 1].name);
+
+	if (res == 0)
+	{
+		cout << ("NAME ALREADY EXISTS ");
+		cout << "\nSELECT DELETE EMPLOYEE FROM MENU TO DELETE ID ";
+
+		_getch();
+		main();
+
+	}
+
+	cout << ("NEW ID INSERTED SUCCESFULLY ");
+	cout << ("\nPRESS ENTER TO RETURN TO MENU ");
+
+	_getch();
+	main();
+
+}
+void edit_emp()
+{
+	system("cls");
+	cout << "    \t\t\t \t\t EDIT DETAILS OF EMPLOYEE " << endl;
+	cout << "  \t\t\t ------------------------------------------------------" << endl;
+	if (num != 0)
+	{
+		int emp_id;
+
+		cout << "ENTER ID OF EMPLOYEE WHICH YOU WANT TO EDIT " << endl;
+
+		cin >> emp_id;
+
+		for (int i = 0; i < num; i++)
+		{
+			if (ep[i].emp_id == emp_id)
+			{
+
+				cout << " OLD DETAILS OF EMPLOYEES " << i + 1 << endl;
+
+				cout << " OLD NAME : " << ep[i].name << endl;
+
+				cout << " OLD EMPLOYEE ID: " << ep[i].emp_id << endl;
+
+				cout << " OLD EMPLOYEE AGE : " << ep[i].age << endl;
+
+				cout << "\nENTER NEW  DETAILS OF EMPLOYEE" << endl;
+
+				cout << "ENTER EMPLOYEE NAME: ";
+
+				cin >> ep[i].name;
+
+				cout << "ENTER ID: ";
+
+				cin >> ep[i].emp_id;
+
+				cout << "ENTER AGE: ";
+
+				cin >> ep[i].age;
+
+				break;
+
+			}
+
+			if (i == num - 1)
+			{
+				cout << "NO ID FOUND IN RECORD" << endl;
+			}
+
+		}
+
+	}
+	else
+	{
+		cout << "NO DATA IS ENTERED" << endl;
+	}
+
+	cout << ("PRESS ENTER TO RETURN TO MENU");
+
+	_getch();
+	main();
+}
+
+void delete_emp()
+{
+	system("cls");
+
+	int emp_id;
+
+	int check;
+
+	printf("\t\t\t ----DELETE ENTRY OF AN EMPLOYEE ---- ");
+
+	cout << endl;
+
+	cout << "ENTER THE ID NUMBER TO BE DELETED :  ";
+
+	cin >> emp_id;
+
+	int i;
+
+	for (i = 0; i <= num - 1; i++)
+
+	{
+
+		if (ep[i].emp_id == emp_id)
+
+		{
+			check = i;
+		}
+
+	}
+
+	for (i = 0; i <= num - 1; i++)
+
+	{
+		if (i == check)
+		{
+			continue;
+		}
+
+		else
+
+		{
+			if (i > check)
+			{
+				tempemp[i - 1] = ep[i];
+			}
+
+			else
+			{
+            	tempemp[i] = ep[i];
+			}
+
+		}
+
+	}
+
+	num--;
+
+	for (i = 0; i <= num - 1; i++)
+	{
+		ep[i] = tempemp[i];
+	}
+	cout << "PRESS ENTER TO RETURN TO MENU ";
+
+	_getch();
+	main();
+}
+
+void show_emp()
+{
+	system("cls");
+
+	cout << "    \t\t\t \t\t EMPLOYEE DETAILS" << endl;
+
+	cout << "  \t\t\t ---------------------------------------------------------------------" << endl;
+	cout << "\t\t|  EMPLOYEE NAME  |";
+	cout << "\t\t|  EMPLOYEE ID  |";
+	cout << "\t\t|  EMPLOYEE AGE  |";
+	cout << " \n _______________________________________________________________________________________________________________________";
+
+
+	for (int i = 0; i <= num - 1; i++)
+	{
+		cout << "\n\t\t" << ep[i].name << "\t\t|";
+
+		cout << "\t\t\t" << ep[i].emp_id << "\t\t|";
+
+		cout << "\t\t\t" << ep[i].age << "\t\t|";
+	}
+
+	cout << "\nPRESS ENTER TO RETURN TO MENU ";
+
+	_getch();
+	main();
+
+}
+
+
+
+void sort_emp()
+{
+	system("cls");
+
+	emp temp;
+
+	for (int i = 0; i < num; i++)
+	{
+		for (int j = i + 1; j < num; j++)
+		{
+			int r = strcmp(ep[i].name, ep[j].name);
+			if (r > 0)
+			{
+				temp = ep[i];
+				ep[i] = ep[j];
+				ep[j] = temp;
+			}
+		}
+	}
+	cout << "PRESS ENTER TO DISPLAY ";
+
+	_getch;
+	show_emp();
+}
+
+
+void search_emp()
+{
+	system("cls");
+	cout << "    \t\t\t \t\t SEARCH DETAILS OF EMPLOYEE " << endl;
+	cout << "  \t\t\t ------------------------------------------------------" << endl;
+	cout << "\n";
+	if (num != 0)
+	{
+		int emp_id;
+
+		cout << "ENTER EMPLOYEE ID YOU WANT TO SEARCH :  ";
+
+		cin >> emp_id;
+
+		for (int i = 0; i < num; i++)
+		{
+			if (ep[i].emp_id == emp_id)
+			{
+
+				cout << " DETAILS OF EMPLOYEE " << i + 1 << endl;
+
+				cout << "NAME: " << ep[i].name << endl;
+
+				cout << "ID: " << ep[i].emp_id << endl;
+
+				cout << "AGE: " << ep[i].age << endl;
+
+				break;
+
+			}
+
+			if (i == num - 1)
+			{
+				cout << "NO SUCH ID FOUND" << endl;
+			}
+
+		}
+
+	}
+	else
+	{
+		cout << "NO DATA IS ENTERED" << endl;
+	}
+	cout << ("PRESS ENTER TO RETURN TO MENU");
+
+	_getch();
+	main();
+
+}
+
+
+
