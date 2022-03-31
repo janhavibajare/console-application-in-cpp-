@@ -95,13 +95,13 @@ int main()
 			insert_dept();
 			break;
 		case 2:
-			show_dept();
-			break;
-		case 3:
 			edit_dept();
 			break;
+		case 3:
+			delete_dept(); 
+			break;
 		case 4:
-			delete_dept();
+			show_dept();
 			break;
   case 5:
 		  insert_emp();
